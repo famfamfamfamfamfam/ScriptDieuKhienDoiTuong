@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
     public float speed;
 
     void Start()
@@ -14,18 +15,10 @@ public class PlayerController : MonoBehaviour
 
     string roed = "u";
 
-    void ifs(ref Quaternion curDir, int rotaNum, ref string roed, string dirVa)
-    {
-        curDir = Quaternion.Euler(0, rotaNum, 0);
-        transform.rotation = curDir;
-        roed = dirVa;
-
-    }
-
     void FixedUpdate()
     {
         Vector3 curPos = transform.position;
-        Quaternion curDir = transform.rotation;
+
         if (curPos.x == 96 && roed == "u")
         {
             if (curPos.z < 107)
@@ -35,7 +28,8 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                ifs(ref curDir, -90, ref roed, "l");
+                transform.Rotate(0, -90, 0);
+                roed = "l";
             }
         }
         if (curPos.z >= 107 && roed == "l")
@@ -47,7 +41,8 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                ifs(ref curDir, -180, ref roed, "d");
+                transform.Rotate(0, -90, 0);
+                roed = "d";
             }
         }
         if (curPos.x <= -11 && roed == "d")
@@ -59,7 +54,8 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                ifs(ref curDir, 90, ref roed, "r");
+                transform.Rotate(0, -90, 0);
+                roed = "r";
             }
         }
         if (curPos.z <= -11 && roed == "r")
@@ -71,7 +67,8 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                ifs(ref curDir, 0, ref roed, "u");
+                transform.Rotate(0, -90, 0);
+                roed = "u";
             }
         }
     }
